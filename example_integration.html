@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Assistant Integration Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2 {
+            color: #333;
+        }
+        
+        .example-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+        }
+        
+        .demo-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        
+        .btn:hover {
+            background: #0056b3;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .widget-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .status-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #dee2e6;
+        }
+        
+        .navigation-menu {
+            background: #343a40;
+            padding: 15px 0;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        
+        .navigation-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .navigation-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .navigation-menu a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .widget-controls {
+                flex-direction: column;
+            }
+            
+            .navigation-menu ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Voice Assistant Integration Example</h1>
+        
+        <div class="alert alert-info">
+            <strong>Welcome!</strong> This page demonstrates how to integrate the AI Voice Assistant into your website. 
+            The widget is already loaded and ready to help you navigate and complete tasks on this page.
+        </div>
+        
+        <!-- Navigation Menu -->
+        <nav class="navigation-menu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Integration Examples -->
+        <div class="example-section">
+            <h2>📋 Integration Methods</h2>
+            
+            <h3>Method 1: Simple Script Tag</h3>
+            <div class="code-block">
+                <pre>&lt;script src="http://localhost:5000/widget.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    new AIVoiceWidget({
+        serverUrl: 'http://localhost:5000',
+        theme: 'modern',
+        position: 'bottom-right'
+    });
+&lt;/script&gt;</pre>
+            </div>
+            
+            <h3>Method 2: Auto-initialization</h3>
+            <div class="code-block">
+                <pre>&lt;script&gt;
+    window.aiVoiceWidgetConfig = {
+        serverUrl: 'http://localhost:5000',
+        theme: 'modern',
+        position: 'bottom-right',
+        autoConnect: true
+    };
+&lt;/script&gt;
+&lt;script src="http://localhost:5000/widget.js"&gt;&lt;/script&gt;</pre>
+            </div>
+            
+            <h3>Method 3: iframe Embedding</h3>
+            <div class="code-block">
+                <pre>&lt;iframe 
+    src="http://localhost:5000/widget?theme=modern&amp;position=bottom-right"
+    width="320" 
+    height="500"
+    frameborder="0"&gt;
+&lt;/iframe&gt;</pre>
+            </div>
+        </div>
+        
+        <!-- Demo Form -->
+        <div class="example-section">
+            <h2>📝 Demo Form - Try Voice Assistance</h2>
+            <p>Use the AI voice assistant to help you fill out this form. Try saying things like:</p>
+            <ul>
+                <li>"Help me fill out this form"</li>
+                <li>"What information do I need to provide?"</li>
+                <li>"How do I submit this form?"</li>
+            </ul>
+            
+            <form class="demo-form" id="demo-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" placeholder="Enter your company name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="service">Service Interest</label>
+                    <select id="service" name="service">
+                        <option value="">Select a service</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="development">Development</option>
+                        <option value="support">Support</option>
+                        <option value="training">Training</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your project or requirements"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="newsletter" name="newsletter" style="width: auto; margin-right: 8px;">
+                        Subscribe to our newsletter
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms" required style="width: auto; margin-right: 8px;">
+                        I agree to the terms and conditions *
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn">Submit Form</button>
+                <button type="reset" class="btn btn-secondary" style="margin-left: 10px;">Reset Form</button>
+            </form>
+        </div>
+        
+        <!-- Widget Controls -->
+        <div class="example-section">
+            <h2>🎛️ Widget Controls</h2>
+            <p>Test different widget configurations:</p>
+            
+            <div class="widget-controls">
+                <button class="btn" onclick="changeTheme('modern')">Modern Theme</button>
+                <button class="btn" onclick="changeTheme('dark')">Dark Theme</button>
+                <button class="btn" onclick="changePosition('bottom-left')">Bottom Left</button>
+                <button class="btn" onclick="changePosition('top-right')">Top Right</button>
+                <button class="btn" onclick="testVoiceFeature()">Test Voice</button>
+                <button class="btn" onclick="testScreenShare()">Test Screen Share</button>
+            </div>
+            
+            <div class="status-display" id="widget-status">
+                <strong>Widget Status:</strong> <span id="status-text">Loading...</span>
+            </div>
+        </div>
+        
+        <!-- Voice Commands Guide -->
+        <div class="example-section">
+            <h2>🎤 Voice Commands to Try</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div>
+                    <h4>Form Assistance</h4>
+                    <ul>
+                        <li>"Help me fill out this form"</li>
+                        <li>"What fields are required?"</li>
+                        <li>"How do I submit this?"</li>
+                        <li>"Clear the form"</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Navigation Help</h4>
+                    <ul>
+                        <li>"Show me the navigation menu"</li>
+                        <li>"How do I go to the contact page?"</li>
+                        <li>"Where is the login button?"</li>
+                        <li>"Help me navigate this site"</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>General Questions</h4>
+                    <ul>
+                        <li>"What can you help me with?"</li>
+                        <li>"How does this website work?"</li>
+                        <li>"What services do you offer?"</li>
+                        <li>"I need technical support"</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Troubleshooting</h4>
+                    <ul>
+                        <li>"The form won't submit"</li>
+                        <li>"I can't find what I'm looking for"</li>
+                        <li>"The page isn't loading properly"</li>
+                        <li>"I forgot my password"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screen Sharing Demo -->
+        <div class="example-section">
+            <h2>🖥️ Screen Sharing Features</h2>
+            <p>The AI assistant can analyze your screen content to provide contextual help:</p>
+            
+            <div class="alert alert-success">
+                <strong>Try this:</strong> Click the screen share button in the widget, then ask questions about what you're seeing on the screen.
+            </div>
+            
+            <ul>
+                <li><strong>Form Analysis:</strong> AI can identify form fields and guide you through completion</li>
+                <li><strong>Navigation Assistance:</strong> Get help finding buttons, links, and menu items</li>
+                <li><strong>Error Resolution:</strong> AI can help troubleshoot error messages and issues</li>
+                <li><strong>Workflow Guidance:</strong> Step-by-step assistance for complex processes</li>
+            </ul>
+        </div>
+        
+        <!-- API Integration -->
+        <div class="example-section">
+            <h2>🔌 API Integration</h2>
+            <p>You can also interact with the AI assistant programmatically:</p>
+            
+            <div class="code-block">
+                <pre>// Send a text query
+fetch('/api/ai-query', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        query: 'How do I reset my password?',
+        context: {
+            url: window.location.href,
+            pageText: document.body.innerText
+        }
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data.response));</pre>
+            </div>
+            
+            <button class="btn" onclick="testAPIQuery()">Test API Query</button>
+            <div id="api-response" class="status-display" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <!-- Widget Integration -->
+    <script>
+        // Widget configuration
+        window.aiVoiceWidgetConfig = {
+            serverUrl: window.location.origin,
+            theme: 'modern',
+            position: 'bottom-right',
+            title: 'Demo Assistant',
+            autoConnect: true,
+            minimized: false
+        };
+    </script>
+    <script src="/widget.js"></script>
+    
+    <script>
+        let currentWidget = null;
+        
+        // Initialize widget status
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatus('Widget loading...');
+            
+            // Wait for widget to initialize
+            setTimeout(() => {
+                if (window.AIVoiceWidget) {
+                    updateStatus('Widget ready! Try the voice features.');
+                } else {
+                    updateStatus('Widget failed to load. Check console for errors.');
+                }
+            }, 2000);
+        });
+        
+        function updateStatus(message) {
+            document.getElementById('status-text').textContent = message;
+        }
+        
+        function changeTheme(theme) {
+            updateStatus(`Changing theme to ${theme}...`);
+            // In a real implementation, you would recreate the widget with new theme
+            setTimeout(() => updateStatus(`Theme changed to ${theme}`), 1000);
+        }
+        
+        function changePosition(position) {
+            updateStatus(`Moving widget to ${position}...`);
+            // In a real implementation, you would update widget position
+            setTimeout(() => updateStatus(`Widget moved to ${position}`), 1000);
+        }
+        
+        function testVoiceFeature() {
+            updateStatus('Testing voice feature... Click the microphone in the widget!');
+        }
+        
+        function testScreenShare() {
+            updateStatus('Testing screen share... Click the screen icon in the widget!');
+        }
+        
+        async function testAPIQuery() {
+            updateStatus('Sending API query...');
+            
+            try {
+                const response = await fetch('/api/ai-query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        query: 'What can you tell me about this demo page?',
+                        context: {
+                            url: window.location.href,
+                            title: document.title,
+                            pageText: document.body.innerText.substring(0, 500)
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('api-response').style.display = 'block';
+                    document.getElementById('api-response').innerHTML = 
+                        `<strong>AI Response:</strong> ${data.response}`;
+                    updateStatus('API query successful!');
+                } else {
+                    updateStatus(`API error: ${data.error}`);
+                }
+            } catch (error) {
+                updateStatus(`API request failed: ${error.message}`);
+            }
+        }
+        
+        // Form submission handler
+        document.getElementById('demo-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form processing
+            updateStatus('Form submitted successfully! (This is just a demo)');
+            
+            // Show success message
+            const successAlert = document.createElement('div');
+            successAlert.className = 'alert alert-success';
+            successAlert.innerHTML = '<strong>Success!</strong> Your form has been submitted. This is just a demo - no data was actually sent.';
+            
+            this.parentNode.insertBefore(successAlert, this);
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => successAlert.remove(), 5000);
+        });
+        
+        // Form reset handler
+        document.querySelector('button[type="reset"]').addEventListener('click', function() {
+            updateStatus('Form reset');
+        });
+        
+        // Add some interactive elements for the AI to help with
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('focus', function() {
+                updateStatus(`Focused on ${this.name || this.id || 'form field'}`);
+            });
+        });
+    </script>
+</body>
+</html>
+

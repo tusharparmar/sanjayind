@@ -1,0 +1,263 @@
+{
+  "workflows": {
+    "login_process": {
+      "title": "User Login Process",
+      "description": "Step-by-step guide for user authentication",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Navigate to Login Page",
+          "description": "Click on the 'Login' or 'Sign In' button",
+          "expected_elements": ["login button", "sign in link"],
+          "common_issues": ["Button not visible", "Page not loading"]
+        },
+        {
+          "step": 2,
+          "title": "Enter Credentials",
+          "description": "Fill in your username/email and password",
+          "expected_elements": ["username field", "password field"],
+          "common_issues": ["Forgot password", "Invalid credentials"]
+        },
+        {
+          "step": 3,
+          "title": "Submit Form",
+          "description": "Click the login button to authenticate",
+          "expected_elements": ["submit button", "login button"],
+          "common_issues": ["Form validation errors", "Server errors"]
+        }
+      ],
+      "troubleshooting": {
+        "forgot_password": "Click 'Forgot Password' link and follow email instructions",
+        "account_locked": "Contact support or wait for automatic unlock",
+        "invalid_credentials": "Double-check username and password spelling"
+      }
+    },
+    "form_submission": {
+      "title": "Form Submission Process",
+      "description": "General guidance for filling and submitting forms",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Review Required Fields",
+          "description": "Identify all required fields marked with asterisks (*)",
+          "expected_elements": ["required field indicators", "form labels"],
+          "common_issues": ["Missing required fields", "Unclear labels"]
+        },
+        {
+          "step": 2,
+          "title": "Fill Form Data",
+          "description": "Enter accurate information in all fields",
+          "expected_elements": ["input fields", "dropdown menus", "checkboxes"],
+          "common_issues": ["Validation errors", "Format requirements"]
+        },
+        {
+          "step": 3,
+          "title": "Validate and Submit",
+          "description": "Review information and submit the form",
+          "expected_elements": ["submit button", "review section"],
+          "common_issues": ["Validation failures", "Network errors"]
+        }
+      ],
+      "troubleshooting": {
+        "validation_error": "Check field formats and required information",
+        "submission_failed": "Check internet connection and try again",
+        "data_lost": "Use browser back button or refresh to recover"
+      }
+    },
+    "navigation": {
+      "title": "Website Navigation",
+      "description": "How to navigate through website sections",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Use Main Menu",
+          "description": "Look for navigation menu at top or side of page",
+          "expected_elements": ["navigation menu", "menu items"],
+          "common_issues": ["Menu not visible", "Mobile menu hidden"]
+        },
+        {
+          "step": 2,
+          "title": "Use Breadcrumbs",
+          "description": "Follow breadcrumb trail to understand location",
+          "expected_elements": ["breadcrumb navigation"],
+          "common_issues": ["Breadcrumbs missing", "Unclear hierarchy"]
+        },
+        {
+          "step": 3,
+          "title": "Use Search Function",
+          "description": "Use site search to find specific content",
+          "expected_elements": ["search box", "search button"],
+          "common_issues": ["No search results", "Search not working"]
+        }
+      ],
+      "troubleshooting": {
+        "lost_navigation": "Use browser back button or site logo to return home",
+        "broken_links": "Try alternative navigation paths or contact support",
+        "mobile_issues": "Look for hamburger menu icon on mobile devices"
+      }
+    },
+    "ecommerce_checkout": {
+      "title": "E-commerce Checkout Process",
+      "description": "Complete guide for online shopping checkout",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Review Cart Items",
+          "description": "Check all items, quantities, and prices in your cart",
+          "expected_elements": ["cart items", "quantity selectors", "price totals"],
+          "common_issues": ["Wrong quantities", "Missing items", "Price discrepancies"]
+        },
+        {
+          "step": 2,
+          "title": "Enter Shipping Information",
+          "description": "Provide accurate shipping address and delivery preferences",
+          "expected_elements": ["address fields", "shipping options", "delivery date"],
+          "common_issues": ["Invalid address", "Shipping not available", "Address validation errors"]
+        },
+        {
+          "step": 3,
+          "title": "Select Payment Method",
+          "description": "Choose and enter payment information securely",
+          "expected_elements": ["payment options", "card fields", "billing address"],
+          "common_issues": ["Payment declined", "Invalid card details", "Security verification"]
+        },
+        {
+          "step": 4,
+          "title": "Review and Confirm Order",
+          "description": "Final review before placing the order",
+          "expected_elements": ["order summary", "terms checkbox", "place order button"],
+          "common_issues": ["Terms not accepted", "Order processing errors", "Timeout issues"]
+        }
+      ],
+      "troubleshooting": {
+        "payment_declined": "Check card details, available balance, or try different payment method",
+        "shipping_issues": "Verify address format and check available shipping zones",
+        "order_timeout": "Refresh page and try again, items may still be in cart"
+      }
+    },
+    "account_registration": {
+      "title": "Account Registration Process",
+      "description": "Step-by-step guide for creating a new user account",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Access Registration Page",
+          "description": "Find and click the 'Sign Up' or 'Register' button",
+          "expected_elements": ["sign up button", "register link", "create account"],
+          "common_issues": ["Registration link not found", "Page not accessible"]
+        },
+        {
+          "step": 2,
+          "title": "Fill Personal Information",
+          "description": "Enter required personal details accurately",
+          "expected_elements": ["name fields", "email field", "phone number"],
+          "common_issues": ["Email already exists", "Invalid email format", "Required fields missing"]
+        },
+        {
+          "step": 3,
+          "title": "Create Password",
+          "description": "Set a strong, secure password",
+          "expected_elements": ["password field", "confirm password", "password requirements"],
+          "common_issues": ["Password too weak", "Passwords don't match", "Special character requirements"]
+        },
+        {
+          "step": 4,
+          "title": "Verify Account",
+          "description": "Complete email or phone verification",
+          "expected_elements": ["verification code field", "resend button"],
+          "common_issues": ["Code not received", "Code expired", "Verification failed"]
+        }
+      ],
+      "troubleshooting": {
+        "email_exists": "Try logging in instead or use password reset if you forgot your password",
+        "verification_failed": "Check spam folder for verification email or request new code",
+        "password_requirements": "Use combination of uppercase, lowercase, numbers, and special characters"
+      }
+    }
+  },
+  "faqs": [
+    {
+      "question": "How do I reset my password?",
+      "answer": "Click on 'Forgot Password' on the login page, enter your email address, and follow the instructions sent to your email.",
+      "category": "authentication",
+      "keywords": ["password", "reset", "forgot", "login"]
+    },
+    {
+      "question": "Why is the page not loading?",
+      "answer": "This could be due to internet connectivity issues, server problems, or browser cache. Try refreshing the page, clearing your browser cache, or checking your internet connection.",
+      "category": "technical",
+      "keywords": ["loading", "page", "error", "connection"]
+    },
+    {
+      "question": "How do I contact support?",
+      "answer": "You can contact support through the 'Contact Us' page, email support@company.com, or use the live chat feature if available.",
+      "category": "support",
+      "keywords": ["support", "contact", "help", "assistance"]
+    },
+    {
+      "question": "How do I save my progress?",
+      "answer": "Most forms auto-save your progress. Look for 'Save Draft' buttons or ensure you're logged in for automatic saving.",
+      "category": "functionality",
+      "keywords": ["save", "progress", "draft", "auto-save"]
+    },
+    {
+      "question": "What browsers are supported?",
+      "answer": "We support the latest versions of Chrome, Firefox, Safari, and Edge. For best experience, please keep your browser updated.",
+      "category": "technical",
+      "keywords": ["browser", "compatibility", "supported", "chrome", "firefox", "safari", "edge"]
+    },
+    {
+      "question": "How do I enable microphone access?",
+      "answer": "Click the microphone icon in your browser's address bar and select 'Allow'. You may need to refresh the page after granting permission.",
+      "category": "permissions",
+      "keywords": ["microphone", "permission", "access", "voice", "audio"]
+    },
+    {
+      "question": "Can I use this on mobile devices?",
+      "answer": "Yes, our voice assistant works on mobile devices. Make sure to allow microphone access when prompted.",
+      "category": "mobile",
+      "keywords": ["mobile", "phone", "tablet", "ios", "android"]
+    },
+    {
+      "question": "How do I share my screen?",
+      "answer": "Click the screen share button and select the window or screen you want to share. Your browser will ask for permission first.",
+      "category": "screen_sharing",
+      "keywords": ["screen", "share", "sharing", "display", "window"]
+    }
+  ],
+  "common_elements": {
+    "buttons": ["submit", "save", "cancel", "next", "previous", "login", "logout", "sign up", "register"],
+    "form_fields": ["email", "password", "name", "phone", "address", "date", "username"],
+    "navigation": ["menu", "breadcrumbs", "search", "home", "back", "forward"],
+    "indicators": ["required field", "error message", "success message", "loading", "asterisk"]
+  },
+  "troubleshooting_guide": {
+    "browser_issues": {
+      "clear_cache": "Clear browser cache and cookies",
+      "disable_extensions": "Disable browser extensions temporarily",
+      "try_incognito": "Try using incognito/private browsing mode",
+      "update_browser": "Update to the latest browser version"
+    },
+    "form_issues": {
+      "validation_errors": "Check all required fields are filled correctly",
+      "format_errors": "Ensure data matches required format (email, phone, etc.)",
+      "submission_errors": "Check internet connection and try again"
+    },
+    "navigation_issues": {
+      "broken_links": "Use alternative navigation or contact support",
+      "missing_pages": "Check URL spelling or use site search",
+      "access_denied": "Ensure you're logged in with proper permissions"
+    },
+    "voice_issues": {
+      "microphone_not_working": "Check microphone permissions and hardware connection",
+      "voice_not_recognized": "Speak clearly and check for background noise",
+      "no_audio_response": "Check speaker volume and audio permissions"
+    },
+    "screen_sharing_issues": {
+      "permission_denied": "Allow screen sharing permission in browser settings",
+      "poor_quality": "Check internet connection and close unnecessary applications",
+      "not_visible": "Ensure the correct window or screen is selected"
+    }
+  }
+}
+

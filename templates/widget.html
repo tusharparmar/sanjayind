@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Assistant Widget</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: transparent;
+        }
+        
+        .widget-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- This page is used for iframe embedding -->
+    <div id="widget-container"></div>
+    
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    
+    <!-- WebRTC Client -->
+    <script src="/static/js/webrtc-client.js"></script>
+    
+    <!-- Voice Assistant -->
+    <script src="/static/js/voice-assistant.js"></script>
+    
+    <!-- Widget -->
+    <script src="/static/js/widget.js"></script>
+    
+    <script>
+        // Get configuration from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const config = {
+            serverUrl: urlParams.get('serverUrl') || window.location.origin,
+            theme: urlParams.get('theme') || 'modern',
+            position: urlParams.get('position') || 'bottom-right',
+            title: urlParams.get('title') || 'AI Voice Assistant',
+            enableVoice: urlParams.get('enableVoice') !== 'false',
+            enableScreenShare: urlParams.get('enableScreenShare') !== 'false',
+            enableChat: urlParams.get('enableChat') !== 'false',
+            autoConnect: urlParams.get('autoConnect') !== 'false',
+            minimized: urlParams.get('minimized') === 'true'
+        };
+        
+        // Initialize widget
+        const widget = new AIVoiceWidget(config);
+        
+        // Handle iframe communication
+        window.addEventListener('message', function(event) {
+            // Handle messages from parent window
+            if (event.data.type === 'widget-command') {
+                switch (event.data.command) {
+                    case 'minimize':
+                        widget.toggleMinimize();
+                        break;
+                    case 'close':
+                        widget.close();
+                        break;
+                    case 'connect':
+                        widget.connect();
+                        break;
+                    case 'sendMessage':
+                        widget.addMessage('user', event.data.message);
+                        break;
+                }
+            }
+        });
+        
+        // Send status updates to parent window
+        function notifyParent(type, data) {
+            if (window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'widget-status',
+                    status: type,
+                    data: data
+                }, '*');
+            }
+        }
+        
+        // Notify parent when widget is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            notifyParent('ready', { config: config });
+        });
+    </script>
+</body>
+</html>
+

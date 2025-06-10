@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Assistant - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .demo-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .demo-controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .integration-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        
+        .integration-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-connected {
+            background: #28a745;
+        }
+        
+        .status-disconnected {
+            background: #dc3545;
+        }
+        
+        .status-connecting {
+            background: #ffc107;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .demo-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>AI Voice Assistant</h1>
+            <p>Experience the future of web interaction with our embeddable AI voice assistant. 
+               Enable voice calls, screen sharing, and intelligent guidance on any website.</p>
+            
+            <div class="demo-controls">
+                <button class="demo-btn" onclick="initializeWidget()">Try Widget Demo</button>
+                <button class="demo-btn" onclick="testVoiceCall()">Test Voice Call</button>
+                <button class="demo-btn" onclick="testScreenShare()">Test Screen Share</button>
+            </div>
+            
+            <div id="connection-status" style="margin-top: 20px;">
+                <span class="status-indicator status-disconnected"></span>
+                <span>Not Connected</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎤</div>
+                <h3>Voice Interaction</h3>
+                <p>Natural voice conversations with AI assistant powered by Google's Gemini API. 
+                   Ask questions, get guidance, and interact hands-free.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🖥️</div>
+                <h3>Screen Sharing</h3>
+                <p>Share your screen with the AI assistant for context-aware help. 
+                   Get specific guidance based on what you're seeing.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <h3>Smart Knowledge Base</h3>
+                <p>Integrated knowledge base with workflows and troubleshooting guides. 
+                   Get step-by-step assistance for common tasks.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🔗</div>
+                <h3>Easy Integration</h3>
+                <p>Embed into any website with a simple script tag. 
+                   Customizable appearance and behavior to match your brand.</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Live Demo</h2>
+            <p>The widget is already loaded on this page! Look for the AI assistant widget in the bottom-right corner.</p>
+            <p>Try these features:</p>
+            <ul style="text-align: left; max-width: 600px; margin: 20px auto;">
+                <li>Click the microphone button and ask a question</li>
+                <li>Use the screen share button to share your screen</li>
+                <li>Type messages in the chat interface</li>
+                <li>Drag the widget around the screen</li>
+                <li>Minimize and maximize the widget</li>
+            </ul>
+        </div>
+        
+        <div class="integration-section">
+            <h2>Integration Guide</h2>
+            
+            <h3>1. Basic Integration</h3>
+            <p>Add this script tag to your website:</p>
+            <div class="code-block">
+                <pre>&lt;script src="{{request.url_root}}widget.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    // Initialize the widget
+    new AIVoiceWidget({
+        serverUrl: '{{request.url_root}}',
+        theme: 'modern',
+        position: 'bottom-right'
+    });
+&lt;/script&gt;</pre>
+            </div>
+            
+            <h3>2. Custom Configuration</h3>
+            <div class="code-block">
+                <pre>&lt;script&gt;
+    new AIVoiceWidget({
+        serverUrl: '{{request.url_root}}',
+        theme: 'dark',
+        position: 'bottom-left',
+        title: 'My AI Assistant',
+        enableVoice: true,
+        enableScreenShare: true,
+        enableChat: true,
+        autoConnect: true,
+        minimized: false
+    });
+&lt;/script&gt;</pre>
+            </div>
+            
+            <h3>3. Environment Setup</h3>
+            <p>To run your own instance:</p>
+            <div class="code-block">
+                <pre># 1. Clone the repository
+git clone &lt;repository-url&gt;
+cd ai-voice-assistant
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Set up environment variables
+cp .env.example .env
+# Edit .env and add your Gemini API key
+
+# 4. Run the application
+python app.py</pre>
+            </div>
+            
+            <h3>4. Required Environment Variables</h3>
+            <div class="code-block">
+                <pre>GEMINI_API_KEY=your-gemini-api-key-here
+SECRET_KEY=your-secret-key
+FLASK_DEBUG=False
+HOST=0.0.0.0
+PORT=5000</pre>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    
+    <!-- Widget -->
+    <script>
+        // Auto-initialize widget
+        window.aiVoiceWidgetConfig = {
+            serverUrl: window.location.origin,
+            theme: 'modern',
+            position: 'bottom-right',
+            autoConnect: true
+        };
+    </script>
+    <script src="/widget.js"></script>
+    
+    <script>
+        let widget = null;
+        let socket = null;
+        
+        function updateConnectionStatus(status, text) {
+            const statusElement = document.getElementById('connection-status');
+            const indicator = statusElement.querySelector('.status-indicator');
+            const textElement = statusElement.querySelector('span:last-child');
+            
+            indicator.className = `status-indicator status-${status}`;
+            textElement.textContent = text;
+        }
+        
+        function initializeWidget() {
+            if (widget) {
+                alert('Widget is already initialized! Check the bottom-right corner.');
+                return;
+            }
+            
+            widget = new AIVoiceWidget({
+                serverUrl: window.location.origin,
+                theme: 'modern',
+                position: 'bottom-right',
+                autoConnect: true
+            });
+            
+            updateConnectionStatus('connecting', 'Connecting...');
+            
+            // Connect to socket for status updates
+            socket = io();
+            socket.on('connect', () => {
+                updateConnectionStatus('connected', 'Connected');
+            });
+            
+            socket.on('disconnect', () => {
+                updateConnectionStatus('disconnected', 'Disconnected');
+            });
+        }
+        
+        function testVoiceCall() {
+            if (!widget) {
+                alert('Please initialize the widget first!');
+                return;
+            }
+            alert('Click the phone icon in the widget to test voice calling!');
+        }
+        
+        function testScreenShare() {
+            if (!widget) {
+                alert('Please initialize the widget first!');
+                return;
+            }
+            alert('Click the screen icon in the widget to test screen sharing!');
+        }
+        
+        // Auto-initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure widget script is loaded
+            setTimeout(() => {
+                if (window.AIVoiceWidget) {
+                    initializeWidget();
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
